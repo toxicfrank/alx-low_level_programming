@@ -1,6 +1,6 @@
 #include "main.h"
 /**
- * print_alphabet - fuction that prints alphabet
+ * print_alphabet - gcc -Wall -pedantic -Werror -Wextra -std=gnu89 _putchar.c 1-main.c 1-alphabet.c -o 1-alphabetfuction that prints alphabet
  *
  * Return: always 0
  */
