@@ -2,7 +2,7 @@
 /**
  * print_last_digit - prints last digit
  *
- * @i: parameter function
+ * @i: function parameter
  * Return: always m
  */
 int print_last_digit(int i)
@@ -13,5 +13,6 @@ int print_last_digit(int i)
 
 	if (i < 0)
 		m = -m;
+	_putchar(m + '0');
 	return (m);
 }
