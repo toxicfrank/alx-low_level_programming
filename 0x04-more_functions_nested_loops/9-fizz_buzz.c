@@ -2,7 +2,7 @@
 /**
  * main - Prints a Fizz Buzz programme
  *
- * Returns: always 0 (Succes)
+ * Return: always 0 (Succes)
  */
 int main(void)
 {
