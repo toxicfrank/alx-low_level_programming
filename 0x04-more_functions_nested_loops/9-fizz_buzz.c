@@ -26,10 +26,10 @@ int main(void)
 		{
 			printf("%d", x);
 		}
-		if (x != 100)
-		{
-			printf(" ");
-		}
+	if (x != 100)
+	{
+		printf(" ");
+	}
 	}
 	return (0);
 }
