@@ -1,5 +1,6 @@
 #include "main.h"
 #include <stdlib.h>
+#include <string.h>
 /**
  * *string_nconcat - points to a newly allocated space in memory
  * @s1: function parameter
@@ -22,8 +23,9 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
     
     /* Allocate memory for the result string */
     result = malloc(sizeof(char) * (s1_len + n + 1));
-    if (result == NULL) {
-        return NULL;  // Return NULL if allocation fails
+    if (result == NULL)
+	{
+        return NULL;  /* Return NULL if allocation fails */
     }
     
     /* Copy the contents of s1 and the first n bytes
