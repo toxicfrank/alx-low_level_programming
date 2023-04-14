@@ -7,7 +7,7 @@
  * @s2: function parameter
  * @s3: fuction parameter
  * @n: function parameter
- * Return: result 
+ * Return: result
  */
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
@@ -15,11 +15,13 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	char *result;
 
 /*If either s1 or s2 is NULL, treat it as an empty string*/
+
 	s1_len = (s1 == NULL) ? 0 : strlen(s1);
 	s2_len = (s2 == NULL) ? 0 : strlen(s2);
 
-/*If n is greater than or equal to s2_len, use the entire
-string s2*/
+/**If n is greater than or equal to s2_len, use the entire
+*string s2
+*/
 	if (n >= s2_len)
 	{
 		n = s2_len;
@@ -36,8 +38,9 @@ string s2*/
 		return NULL;/* Return NULL if allocation fails*/
 	}
 
-/*Copy the contents of s1 and the first n bytes
-of s2 into the result string*/
+/**Copy the contents of s1 and the first n bytes
+*of s2 into the result string
+*/
 	strncpy(result, s1, s1_len);
 	strncpy(result + s1_len, s2, n);
 
