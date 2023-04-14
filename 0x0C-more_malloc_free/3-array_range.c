@@ -10,8 +10,8 @@
  */
 int *array_range(int min, int max)
 {
-	int *ptr;
-	int array;
+	int *arr;
+	int size, i;
 
 /*Checking if min is greater then max*/
 	if (min > max)
@@ -19,17 +19,19 @@ int *array_range(int min, int max)
 		return (NULL);
 	}
 
-/*calculating the memory*/
-	array = (min * max);
+	size = max - min + 1;
 
-/*allocating the mem */
-	ptr = malloc(array);
+	arr = (int *) malloc(sizeof(int));
 
-	if (ptr == NULL)
+	if (arr == NULL)
 	{
 		return (NULL);
 	}
 
-	return (ptr);
+	for (i = 0; i < size; i++)
+	{
+		arr[i] = min + 1;
+	}
 
+	return (arr);
 }
