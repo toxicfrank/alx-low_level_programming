@@ -1,7 +1,7 @@
 #include "dog.h"
 #include <stdlib.h>
 /**
- * init_dog - initialize var
+ * init_dog - initialize var of type struct dog
  * @d: pointer to struct dog
  * @name: function parameter
  * @age: function parameter
