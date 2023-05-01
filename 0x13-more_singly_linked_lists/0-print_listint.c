@@ -4,19 +4,23 @@
 
 /**
  * print_listint - function that prints all the elements of a listint_t list.
- * @h: function parameter
+ * @h: pointer to head of list
  * Return: size_t
  */
 
 size_t print_listint(const listint_t *h)
 {
-	size_t count = 0;
+	const listint_t *current;
+	unsigned int n;
 
-	while (h != NULL)
+	current = h;
+	n = 0;
+
+	while (current != NULL)
 	{
-		printf("%d\n", h->n);
-		h = h->next;
-		count++;
+		printf("%i\n", current->n);
+		current = current->next;
+		n++;
 	}
-	return (count);
+	return (n);
 }
