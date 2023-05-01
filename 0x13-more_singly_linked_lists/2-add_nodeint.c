@@ -20,9 +20,9 @@ listint_t *add_nodeint(listint_t **head, const int n)
 	{
 		return (NULL);
 	}
-	/*Assign n to the new_node's n*/
+	/*Assign n to the new_node as n*/
 	new_node->n = n;
-	/*Make the new_nodes next point to the current head*/
+	/*Make the new_node point to the current head*/
 	new_node->next = *head;
 	/*Make the head point to the new_node*/
 	*head = new_node;
