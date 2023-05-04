@@ -6,9 +6,26 @@
 
 void print_binary(unsigned long int n)
 {
-	if (n < 1)
+	int i, count = 0;
+
+	unsigned long int current;
+
+	for (i = 63; i >= 0; i--)
 	{
-		print_binary(n >> 1);
+		current = n >> i;
+		
+		if (current & 1)
+		{
+			_putchar('1');
+			count++;
+		}
+		else if (count)
+		{
+			_putchar ('0');
+		}
 	}
-	printf("%lu", n & 1);
+	if (!count)
+	{
+		_putchar('0');
+	}
 }
