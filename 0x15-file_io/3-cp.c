@@ -2,39 +2,89 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char *create_buffer(char *file);
-void close_file(int fd);
+void cp(char *file_from, char *file_to);
+
+void _error(int e, char *filename);
 
 /**
- * create_buffer - Allocates 1024 bytes for a buffer.
- * @file: The name of the file buffer is storing chars for.
- *
- * Return: A pointer to the newly-allocated buffer.
+ * main - check whether the number of argument is the correct one
+ * @ac: count the arguments
+ * @av: check the argument values
+ * Return: if yes, 0, else, exits with error code 97.
  */
-char *create_buffer(char *file)
+int main(int ac, char *av[])
 {
-	char *buffer;
-
-	buffer = malloc(sizeof(char) * 1024);
-
-	if (buffer == NULL)
+	if (ac != 3)
 	{
-		dprintf(STDERR_FILENO,
-			"Error: Can't write to %s\n", file);
-		exit(99);
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		exit(97);
 	}
-
-	return (buffer);
+	cp(av[1], av[2]);
+	return (0);
 }
 
 /**
- * close_file - Closes file descriptors.
- * @fd: The file descriptor to be closed.
+ * cp - Function that copies the content of a file to another file.
+ * @file_from: source, we copy from
+ * @file_to: we paste content here
+ * Return: 1 on success, -1 on failure.
  */
-void close_file(int fd)
+void cp(char *file_from, char *file_to)
 {
-	int c;
+	int fd_read, n_read, fd_write, n_write;
+	int c_flag = 1;
+	char buf[1024];
 
-	c = close(fd);
+	/* READ */
+	fd_read = open(file_from, O_RDONLY);
+	if (fd_read < 0)
+		_error(98, file_from);
+	/* WRITE */
+	fd_write = open(file_to, O_CREAT | O_WRONLY | O_TRUNC, 0664);
+	if (fd_write < 0)
+	{
+		close(fd_read);
+		_error(99, file_to);
+	}
+	do {
+		/* READ */
+		n_read = read(fd_read, buf, 1024);
+		if (n_read < 0)
+			_error(98, file_from);
+		/* WRITE */
+		n_write = write(fd_write, buf, n_read);
+		if (n_write < n_read)
+			_error(99, file_to);
+	} while (n_write == 1024);
+	if (close(fd_read) < 0)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_read);
+		c_flag = 0;
+	}
+	if (close(fd_write) < 0)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd_write);
+		c_flag = 0;
+	}
+	if (!c_flag)
+		exit(100);
+}
 
+/**
+ * _error - Read file.
+ * @e: Error number
+ * @filename: File name
+ */
+void _error(int e, char *filename)
+{
+	if (e == 98)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", filename);
+		exit(98);
+	}
+	if (e == 99)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", filename);
+		exit(99);
+	}
 }
